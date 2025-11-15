@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOLA Venture Studio | Digital Venture & Fintech Advisory</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: #ffffff;
+            overflow-x: hidden;
+            background: #000;
+        }
+
+        html {
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+            overflow-y: scroll;
+            height: 100%;
+        }
+
+        /* Background with parallax effect */
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, 
+                        rgba(0, 0, 0, 0.6) 0%, 
+                        rgba(10, 15, 30, 0.85) 50%,
+                        rgba(0, 0, 0, 0.9) 100%), 
+                        url('images/earth-from-moon.jpg') center/cover no-repeat fixed;
+            z-index: -1;
+        }
+
+        .background::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 80%, rgba(59, 130, 246, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            text-align: center;
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
+        }
+
+        .logo {
+            max-width: 350px;
+            margin-bottom: 3rem;
+            filter: drop-shadow(0 8px 32px rgba(255, 255, 255, 0.15));
+            animation: fadeInUp 1.2s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: 200;
+            letter-spacing: -2px;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #ffffff 0%, #a78bfa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1.4s ease-out;
+        }
+
+        .tagline {
+            font-size: 1.3rem;
+            line-height: 1.9;
+            max-width: 750px;
+            margin: 0 auto 3.5rem;
+            color: #e2e8f0;
+            font-weight: 300;
+            animation: fadeInUp 1.6s ease-out;
+        }
+
+        /* Buttons */
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            animation: fadeInUp 1.8s ease-out;
+            margin-bottom: 0;
+        }
+
+        .btn {
+            padding: 1.1rem 2.8rem;
+            border: 2px solid rgba(167, 139, 250, 0.5);
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.15) 0%, rgba(59, 130, 246, 0.1) 100%);
+            color: #e0e7ff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.05rem;
+            font-weight: 500;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(20px);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.3) 0%, rgba(59, 130, 246, 0.2) 100%);
+            border-color: rgba(167, 139, 250, 0.8);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(139, 92, 246, 0.4);
+            color: #fff;
+        }
+
+        /* Section */
+        .section {
+            min-height: 100vh;
+            height: 100vh;
+            padding: 6rem 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 3.5rem;
+            font-weight: 200;
+            margin-bottom: 4rem;
+            text-align: center;
+            letter-spacing: -2px;
+            background: linear-gradient(135deg, #ffffff 0%, #c4b5fd 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .product-card {
+            margin-bottom: 3.5rem;
+            padding: 2.5rem;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.08) 0%, rgba(59, 130, 246, 0.05) 100%);
+            border-radius: 20px;
+            border: 1px solid rgba(167, 139, 250, 0.2);
+            backdrop-filter: blur(10px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(167, 139, 250, 0.4);
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.12) 0%, rgba(59, 130, 246, 0.08) 100%);
+            box-shadow: 0 20px 60px rgba(139, 92, 246, 0.2);
+        }
+
+        .product-card h3 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 1.2rem;
+            color: #e0e7ff;
+            letter-spacing: -0.5px;
+        }
+
+        .product-card p {
+            font-size: 1.15rem;
+            line-height: 1.9;
+            color: #cbd5e1;
+            font-weight: 300;
+        }
+
+        /* About Section */
+        .about-text {
+            font-size: 1.15rem;
+            line-height: 2;
+            color: #cbd5e1;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        /* Contact Section */
+        .contact-info {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .contact-info p {
+            font-size: 1.15rem;
+            line-height: 2;
+            color: #cbd5e1;
+            margin-bottom: 0.75rem;
+        }
+
+        .contact-info a {
+            color: #c4b5fd;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-info a:hover {
+            color: #a78bfa;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 2.5rem 0 0 0;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer p {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.95rem;
+            font-weight: 300;
+        }
+
+        /* Navigation hint */
+        .nav-hint {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 0.85rem;
+            z-index: 100;
+            pointer-events: none;
+            animation: fadeInOut 3s ease-in-out infinite;
+        }
+
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .section-title { font-size: 2rem; }
+            .tagline { font-size: 1.1rem; }
+            .logo { max-width: 200px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="background"></div>
+    <div class="nav-hint">Scroll to navigate ↓</div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <img src="images/nola-logo.png" alt="NOLA Venture Studio" class="logo">
+        <h1>Nola Venture Studio</h1>
+        <p class="tagline">
+            A modern digital venture studio and fintech advisory partner. 
+            We design, build, and scale digital products while offering targeted 
+            expertise in payments, merchant acquiring, and fintech market development.
+        </p>
+    </section>
+
+    <!-- Products Section -->
+    <section class="section" id="products">
+        <div class="container">
+            <h2 class="section-title">Products</h2>
+            
+            <div class="product-card">
+                <h3>SKPQ</h3>
+                <p>A smart queue and customer-flow solution for restaurants. Built for speed, transparency, and operational efficiency.</p>
+            </div>
+
+            <div class="product-card">
+                <h3>Cravvo</h3>
+                <p>A habit, wellness, and behavioural micro-nudging app designed to help users build consistency through simple daily actions.</p>
+            </div>
+
+            <div class="product-card">
+                <h3>Vōcem</h3>
+                <p>An AI-powered Knowledge Operating System that helps academics, executives, and professionals convert scattered knowledge into public influence through intelligent curation, conversational learning, and multi-platform distribution.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section" id="about">
+        <div class="container">
+            <h2 class="section-title">About</h2>
+            <p class="about-text">
+                Nola Venture Studio is a Wyoming-registered digital venture and fintech advisory studio.
+            </p>
+            <p class="about-text">
+                We design, build, and launch focused digital products while providing targeted expertise across payments, merchant acquiring, POS ecosystems, and early-stage product strategy.
+            </p>
+            <p class="about-text">
+                Our approach is lean, private, and execution-driven—combining practical industry experience with AI-enhanced workflows to accelerate clarity, product development, and go-to-market planning.
+            </p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section" id="contact">
+        <div class="container">
+            <h2 class="section-title">Contact</h2>
+            <div class="contact-info">
+                <p><strong>Nola Venture Studio LLC</strong></p>
+                <p>30 N Gould St Ste R</p>
+                <p>Sheridan, Wyoming 82801</p>
+                <p>USA</p>
+                <p>Email: <a href="mailto:hello@nola.ventures">hello@nola.ventures</a></p>
+            </div>
+            <div class="footer">
+                <p>© 2025 Nola Venture Studio LLC</p>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>
